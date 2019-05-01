@@ -15,6 +15,28 @@ app.use(express.static(publicPath));
 // io = This is the backend communication
 let io = socketIO(server);
 
+// on is to LISTEN the CLIENT messages
+io.on('connection', (client)=>{
+    console.log('User has just CONNECTED')
+    
+    // emit is to SEND messages to the CLIENT
+    client.emit('sendMessageFromClient',{
+        username: 'Admin',
+        message: 'Wellcome to the CHAT !!!'
+    })
+
+
+    client.on('disconnect', ()=>{
+        console.log('User has just DISCONNECTED')
+    
+    })
+
+    // on is to LISTEN the CLIENT messages
+    client.on('sendMessageFromClient', (message)=>{
+        console.log(message)
+    })
+
+})
 
 server.listen(process.env.PORT, (err) => {
 
