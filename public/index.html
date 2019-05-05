@@ -28,7 +28,10 @@
         socket.emit('sendMessageFromClient',{
             username: 'Leo',
             message: 'Hello world'
+        }, function(response) {
+            console.log(response);
         })
+
         // LISTEN messages from the SERVER
         socket.on('sendMessageFromClient', function(message){
             console.log('Server message: ',message)

@@ -32,8 +32,23 @@ io.on('connection', (client)=>{
     })
 
     // on is to LISTEN the CLIENT messages
-    client.on('sendMessageFromClient', (message)=>{
+    client.on('sendMessageFromClient', (message, callback )=>{
         console.log(message)
+
+        if ( message.username ){
+            callback(
+                {
+                    response: 'All is RIGHT ;)'
+                }
+            )
+        }else {
+            callback(
+                {
+                    response: 'All is WRONG :( '
+                }
+            )       
+        }
+        
     })
 
 })
